@@ -1,6 +1,7 @@
 name: PHP
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '5,15,25,35,45,55 * * * *'
 #  push
@@ -8,18 +9,24 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.29.0-focal
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.KEY }}
+    - uses: actions/checkout@v3
+#      with:
+#        token: ${{ secrets.KEY }}
 
-    - name: Run PHP Scrape
-      run: php updater.php
-
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Updating Files
+    - name: First
+      run: pip install pytest-playwright
+    - name: Second
+      run: playwright install
+    - name: Run 
+      run: pytest test.py
+      
+      
+#    - uses: stefanzweifel/git-auto-commit-action@v4
+#      with:
+#        commit_message: Updating Files
 #        branch: Auto-Commit-Branch
-        push_options: --force
+#        push_options: --force

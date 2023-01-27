@@ -4,7 +4,7 @@ jobs:
   test:
     docker:
       - image: mcr.microsoft.com/playwright/python:v1.29.0-focal
-    parallelism: 6
+    parallelism: 8
     steps:
      - checkout
      - run: |

